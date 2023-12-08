@@ -57,16 +57,18 @@ public class GameplayManager : MonoBehaviour
 
     private void Update()
     {
-        //Play
+        // Play
         if (Input.GetKeyDown(KeyCode.Mouse0) ||
             Input.GetKeyDown(KeyCode.LeftArrow) ||
-            Input.GetKeyDown(KeyCode.RightArrow))
+            Input.GetKeyDown(KeyCode.RightArrow) ||
+            (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began))
+        {
             if (!lose && !playing)
             {
                 playing = true;
-
                 OnPlay?.Invoke();
             }
+        }
 
         if (playing && !lose)
             blocks.Translate(0, blocksSpeed * Time.deltaTime, 0, Space.World);
